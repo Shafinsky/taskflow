@@ -12,21 +12,23 @@ export default [
       parser: tsParser,
       parserOptions: {
         ecmaVersion: "latest",
-        sourceType: "module",
+        sourceType: "module"
       },
       globals: {
         ...globals.node,
-        ...globals.browser,
-      },
+        ...globals.browser
+      }
     },
     plugins: {
       "@typescript-eslint": tsPlugin,
-      import: importPlugin,
+      import: importPlugin
     },
     rules: {
       "no-unused-vars": "warn",
       "@typescript-eslint/no-unused-vars": "warn",
       "import/order": "warn",
-    },
-  },
+      "quotes": ["warn", "single"],
+      "semi": ["warn", "always"]
+    }
+  }
 ];
