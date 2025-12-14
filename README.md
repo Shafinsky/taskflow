@@ -15,6 +15,7 @@ TaskFlow — вебзастосунок для керування завданн
 - SQLite / PostgreSQL
 - ESLint, Prettier, Husky
 
+
 ## Автор
 Шафінський Ярослав ІС-31
 
