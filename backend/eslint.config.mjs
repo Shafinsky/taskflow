@@ -1,26 +1,22 @@
 // @ts-check
-import eslint from '@eslint/js';
-import globals from 'globals';
+import js from '@eslint/js';
 import tseslint from 'typescript-eslint';
+import globals from 'globals';
 import prettier from 'eslint-plugin-prettier/recommended';
 
-export default tseslint.config(
+export default [
   {
     ignores: [
-      'node_modules/**',
-      'dist/**',
-      'coverage/**',
-      'reports/**',
-      '.stryker-tmp/**',
-      'prisma/**',
-      '*.config.js',
-      '*.config.mjs',
+      '**/node_modules/**',
+      '**/dist/**',
+      '**/coverage/**',
+      '**/.stryker-tmp/**',
+      '**/reports_mutation/**',
     ],
   },
 
-  eslint.configs.recommended,
+  js.configs.recommended,
   ...tseslint.configs.recommended,
-
   prettier,
 
   {
@@ -34,7 +30,6 @@ export default tseslint.config(
       },
     },
     rules: {
-      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
       '@typescript-eslint/no-explicit-any': 'off',
     },
@@ -45,12 +40,37 @@ export default tseslint.config(
     languageOptions: {
       globals: {
         ...globals.jest,
+        ...globals.node,
       },
     },
     rules: {
       'no-undef': 'off',
-      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': 'off',
     },
   },
-);
+
+  {
+    files: ['**/jest.config.js'],
+    languageOptions: {
+      sourceType: 'commonjs',
+    },
+    rules: {
+      'no-undef': 'off',
+    },
+  },
+
+  {
+    files: ['jest.config.js'],
+    languageOptions: {
+      sourceType: 'script',
+      globals: {
+        module: 'readonly',
+        require: 'readonly',
+        __dirname: 'readonly',
+      },
+    },
+    rules: {
+      'no-undef': 'off',
+    },
+  },
+];

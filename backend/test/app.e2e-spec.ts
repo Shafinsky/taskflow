@@ -1,7 +1,7 @@
+import type { Server } from 'http';
 import request from 'supertest';
 import { Test } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
-import type { Server } from 'http';
 
 import { AppModule } from '../src/app.module';
 
