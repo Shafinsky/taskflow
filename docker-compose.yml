@@ -1,3 +1,4 @@
+
 services:
   postgres:
     image: postgres:16
@@ -10,6 +11,17 @@ services:
       - "51214:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build:
+      context: ./backend
+    image: taskflow-backend:latest
+    ports:
+      - "3000:3000"
+    env_file:
+      - backend/.env
+    depends_on:
+      - postgres
 
 volumes:
   pgdata:
