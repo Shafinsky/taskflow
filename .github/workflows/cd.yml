@@ -28,4 +28,4 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/taskflow-backend:latest
+          tags: yarosluv/taskflow-backend:latest
