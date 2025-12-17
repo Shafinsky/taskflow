@@ -49,4 +49,7 @@ jobs:
 
       - name: Docker build (validation only)
         run: |
-          docker build -t taskflow-backend:ci ./backend
+          docker build \
+            -t taskflow-backend:ci \
+            -f backend/Dockerfile \
+            backend
