@@ -1,6 +1,9 @@
-node_modules
-dist
-coverage
-.git
+**/node_modules
+**/dist
+**/.git
+**/.idea
+**/.vscode
+**/pgdata
+**/*.log
+**/*.tsbuildinfo
 .env
-Dockerfile

@@ -11,11 +11,7 @@ export class UserServiceCore {
     return this.repo.findById(id);
   }
 
-  createUser(email: string) {
-    return this.repo.create({
-      email,
-      password: 'test-password',
-      fullName: 'Test User',
-    });
+  createUser(data: { email: string; password: string; fullName:string }) {
+    return this.repo.create(data);
   }
 }

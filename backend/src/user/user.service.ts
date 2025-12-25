@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { UserServiceCore } from 'user-core';
 import { PrismaUserRepository } from './prisma-user.repository';
+import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
@@ -19,7 +20,11 @@ export class UserService {
     return this.core.getUserById(id);
   }
 
-  create(email: string) {
-    return this.core.createUser(email);
+  create(dto: CreateUserDto) {
+    return this.core.createUser({
+      email: dto.email,
+      password: dto.password,
+      fullName: dto.fullName,
+    });
   }
 }
