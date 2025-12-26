@@ -4,5 +4,9 @@
   "workspaces": [
     "backend",
     "libs/user-core"
-  ]
+  ],
+  "devDependencies": {
+    "@commitlint/cli": "^20.2.0",
+    "@commitlint/config-conventional": "^20.2.0"
+  }
 }

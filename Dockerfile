@@ -2,25 +2,26 @@ FROM node:20-alpine
 
 WORKDIR /app
 
-# 1. копіюємо root package.json
+# 1. копіюємо лише package.json для кешу
 COPY package*.json ./
-
-# 2. копіюємо package.json з workspace
-COPY backend/package*.json ./backend/
 COPY libs/user-core/package*.json ./libs/user-core/
+COPY backend/package*.json ./backend/
 
-# 3. встановлюємо залежності для всієї монорепи
-RUN npm install --workspaces
+# 2. встановлюємо залежності
+RUN npm install
 
-# 4. копіюємо весь код
-COPY . .
+# 3. тепер копіюємо ВЕСЬ код
+COPY libs ./libs
+COPY backend ./backend
 
-# 5. prisma
+# 4. збираємо бібліотеку
+RUN npm run build -w libs/user-core
+
+# 5. генеруємо Prisma
 WORKDIR /app/backend
 RUN npx prisma generate
 
-# 6. build backend
+# 6. збираємо backend
 RUN npm run build
 
-EXPOSE 3000
-CMD ["node","dist/main.js"]
+CMD ["npm","run","start:prod"]
